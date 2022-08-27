@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/t')
+@app.route('/test', methods=['GET'])
 def home():
     return 'ttt'
 
