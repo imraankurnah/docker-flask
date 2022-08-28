@@ -1,11 +1,15 @@
 import logging
+import os
 
+from flask import Flask
 from pyvirtualdisplay import Display
 from selenium import webdriver
 
 logging.getLogger().setLevel(logging.INFO)
 
 BASE_URL = 'http://www.example.com/'
+
+app = Flask(__name__)
 
 
 def phantomjs_example():
@@ -25,5 +29,12 @@ def phantomjs_example():
     display.stop()
 
 
-if __name__ == '__main__':
+@app.route('/test', methods=['GET'])
+def test():
     phantomjs_example()
+    return 'fine'
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
