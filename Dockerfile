@@ -14,6 +14,7 @@ RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x
     rm phantomjs-2.1.1-linux-x86_64.tar.bz2
 
 
+RUN pip3 install pillow --global-option="build_ext" --global-option="--disable-zlib" --global-option="--disable-jpeg"
 RUN pip3 install selenium
 RUN pip3 install pyvirtualdisplay
 RUN pip3 install Selenium-Screenshot
