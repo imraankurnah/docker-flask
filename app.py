@@ -6,8 +6,8 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/test', methods=['GET'])
-def test():
+@app.route('/a', methods=['GET'])
+def a():
     r = requests.get('https://google.com')
     print(r.text)
     return str(r.status_code)
