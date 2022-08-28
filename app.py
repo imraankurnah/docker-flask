@@ -1,18 +1,20 @@
-import json
-from flask import Flask, request, jsonify
-import requests
-import os
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 
-app = Flask(__name__)
-
-
-@app.route('/a', methods=['GET'])
-def a():
-    r = requests.get('https://google.com')
-    print(r.text)
-    return str(r.status_code)
-
+def set_chrome_options() -> None:
+    """Sets chrome options for Selenium.
+    Chrome options for headless browser is enabled.
+    """
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_prefs = {}
+    chrome_options.experimental_options["prefs"] = chrome_prefs
+    chrome_prefs["profile.default_content_settings"] = {"images": 2}
+    return chrome_options
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    driver = webdriver.Chrome(options=chrome_options)
+    # Do stuff with your driver
+    driver.close()
