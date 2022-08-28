@@ -1,21 +1,29 @@
-from selenium.webdriver.chrome.options import Options
+import logging
+
+from pyvirtualdisplay import Display
 from selenium import webdriver
 
-def set_chrome_options() -> None:
-    """Sets chrome options for Selenium.
-    Chrome options for headless browser is enabled.
-    """
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_prefs = {}
-    chrome_options.experimental_options["prefs"] = chrome_prefs
-    chrome_prefs["profile.default_content_settings"] = {"images": 2}
-    return chrome_options
+logging.getLogger().setLevel(logging.INFO)
 
-if __name__ == "__main__":
-    driver = webdriver.Chrome(options=chrome_options)
-    r = driver.get('https://python.org')
-    print('okey')
-    driver.close()
+BASE_URL = 'http://www.example.com/'
+
+
+def phantomjs_example():
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+    logging.info('Initialized virtual display..')
+
+    browser = webdriver.PhantomJS()
+    logging.info('Initialized phantomjs browser..')
+
+    browser.get(BASE_URL)
+    logging.info('Accessed %s ..', BASE_URL)
+
+    logging.info('Page title: %s', browser.title)
+
+    browser.quit()
+    display.stop()
+
+
+if __name__ == '__main__':
+    phantomjs_example()
