@@ -16,5 +16,6 @@ def set_chrome_options() -> None:
 
 if __name__ == "__main__":
     driver = webdriver.Chrome(options=chrome_options)
-    # Do stuff with your driver
+    r = driver.get('https://python.org')
+    print('okey')
     driver.close()

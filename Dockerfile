@@ -1,4 +1,5 @@
 FROM python:3.8
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Adding trusting keys to apt for repositories
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
