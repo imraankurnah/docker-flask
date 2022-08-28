@@ -18,6 +18,8 @@ RUN pip3 install pillow --global-option="build_ext" --global-option="--disable-z
 RUN pip3 install selenium
 RUN pip3 install pyvirtualdisplay
 RUN pip3 install Selenium-Screenshot
+RUN pip3 install flask
+RUN pip3 install gunicorn
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -28,5 +30,6 @@ WORKDIR /$APP_HOME
 
 COPY . $APP_HOME/
 
-CMD tail -f /dev/null
-CMD python3 app.py
+ENTRYPOINT [ "python" ]
+
+CMD ["app.py" ]
