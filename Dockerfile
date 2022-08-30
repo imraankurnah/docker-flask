@@ -14,12 +14,9 @@ RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x
     rm phantomjs-2.1.1-linux-x86_64.tar.bz2
 
 
-RUN pip3 install pillow --global-option="build_ext" --global-option="--disable-zlib" --global-option="--disable-jpeg"
 RUN pip3 install selenium
 RUN pip3 install pyvirtualdisplay
 RUN pip3 install Selenium-Screenshot
-RUN pip3 install flask
-RUN pip3 install gunicorn
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -30,6 +27,5 @@ WORKDIR /$APP_HOME
 
 COPY . $APP_HOME/
 
-ENTRYPOINT [ "python" ]
-
-CMD ["app.py" ]
+CMD tail -f /dev/null
+CMD python3 app.py
